@@ -26,7 +26,6 @@ jobs:
           pip install setuptools
           pip install --target="./.python_packages/lib/site-packages" -r ./requirements.txt
           echo "Installing Requirements"
-          sh requirements.sh
           pip install fastapi uvicorn
           echo "The uvicorn version installed is:"
           uvicorn --version
