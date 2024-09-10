@@ -13,8 +13,5 @@ torch
 transformers
 fpdf
 google-generativeai
-fastapi
-uvicorn
 mysql-connector-python
-pydantic
 passlib
