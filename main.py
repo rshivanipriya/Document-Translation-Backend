@@ -56,7 +56,7 @@ async def index():
     with open("login.html", "r") as file:
         return HTMLResponse(content=file.read(), status_code=200)
 
-@app.post("/translate-document/")
+@app.get("/translate-document/")
 async def translate_document(
     target_lang: str = Form(...),
     file: UploadFile = File(...)
