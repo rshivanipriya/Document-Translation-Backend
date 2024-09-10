@@ -2,6 +2,7 @@ import io
 from fastapi import FastAPI, UploadFile, File, Form, HTTPException
 from fastapi.responses import FileResponse, JSONResponse, StreamingResponse
 from fastapi.middleware.cors import CORSMiddleware
+import mysql.connector
 from mysql.connector import Error
 from pydantic import BaseModel
 from passlib.context import CryptContext
@@ -18,6 +19,10 @@ import chardet
 import langid
 import google.generativeai as genai
 import uvicorn
+import mysql
+from fastapi.responses import HTMLResponse, FileResponse, RedirectResponse
+from fastapi.staticfiles import StaticFiles
+from fastapi.templating import Jinja2Templates
 
  
 # app = FastAPI()
@@ -67,7 +72,11 @@ def convertBinarytoFile(binarydata, filename):
     file = io.BytesIO(binarydata)
     file.seek(0)  # Ensure the stream is at the beginning
     return file
-
+@app.get("/", response_class=HTMLResponse)
+async def index():
+    print('Request for index page received')
+    with open("login.html", "r") as file:
+        return HTMLResponse(content=file.read(), status_code=200)
 @app.get("/download/translated/{translation_id}")
 async def download_translated_document(translation_id: int):
     try:
