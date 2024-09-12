@@ -2,6 +2,7 @@ fastapi
 pydantic
 uvicorn
 flask
+jinja2
 flask-cors
 docx
 docx2txt
@@ -14,5 +15,6 @@ transformers
 fpdf
 google-generativeai
 mysql-connector-python
+python-multipart
 passlib
 gunicorn
