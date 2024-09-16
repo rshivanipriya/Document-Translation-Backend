@@ -138,13 +138,16 @@ language_map = {
     "zh": "Chinese",
     "zu": "Zulu"
 }
-app.mount("/", StaticFiles(directory=".", html=True), name="static")
+# app.mount("/", StaticFiles(directory=".", html=True), name="static")
 
-@app.get("/", response_class=HTMLResponse)
-async def index():
-    print('Request for index page received')
-    with open("login.html", "r") as file:
-        return HTMLResponse(content=file.read(), status_code=200)
+# @app.get("/", response_class=HTMLResponse)
+# async def index():
+#     print('Request for index page received')
+#     with open("login.html", "r") as file:
+#         return HTMLResponse(content=file.read(), status_code=200)
+    
+
+
 def extract_text_from_file(file: UploadFile) -> str:
     try:
         if file.content_type == "text/plain":
@@ -176,7 +179,6 @@ async def detect_language(file: UploadFile = File(...)):
             raise HTTPException(status_code=400, detail="No language detected")
     except Exception as e:
         raise HTTPException(status_code=500, detail=str(e))
-
     
 
 
@@ -743,6 +745,9 @@ async def toggle_star(document_id: int):
         if connection.is_connected():
             cursor.close()
             connection.close()
+
+if __name__ == "__main__":
+    uvicorn.run(app, host="0.0.0.0", port = 8000, log_level='info')
  
  
  
